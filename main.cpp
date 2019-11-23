@@ -18,5 +18,7 @@ int main(int argc, char* argv[]) {
 	SDL_Delay(1000);
 
 	SDL_Quit();
+
+	// 두번째 커밋을 위한 주석 테스트
 	return 0;
 }
