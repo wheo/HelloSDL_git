@@ -28,7 +28,7 @@ public:
     State();
     virtual ~State() {};
     
-    void virtual HandleEvents(Uint8* keystates, SDL_Event event, int control_type) {};
+    void virtual HandleEvents(const Uint8* keystates, SDL_Event event, int control_type) {};
     void virtual RenderState() {};
     void virtual UpdateState() {};
     void virtual InitState() {};

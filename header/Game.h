@@ -77,12 +77,14 @@ private:
     State* game_state;
     
     FpsCounter* fps_counter;
-#if SDL1
-    SDL_Surface *screen;
-#else
-	SDL_Window* screen;
-#endif
-    Mix_Chunk *sound;
+
+	SDL_Surface* screen;
+
+	SDL_Window* window;
+
+	SDL_Renderer* renderer;
+	  	
+    Mix_Chunk *sound;	
     Mix_Music *music;
     TTF_Font *font;
     
@@ -106,6 +108,7 @@ public:
     
     Mix_Chunk* GetSfx() {return sound;}
     SDL_Surface* GetScreen() {return screen;}
+	SDL_Renderer* Get_Renderer() { return renderer; }
     State* GetState() {return game_state;}
     TTF_Font* GetMainFont() {return font;}
     

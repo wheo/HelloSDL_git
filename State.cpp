@@ -9,10 +9,11 @@
 #include "State.h"
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 
 State::State(){
     ifstream file;
-    file.open("../../Arkanoid/data/highscores");
+    file.open(".data/highscores");
     string line;
     while(getline(file, line)){
         

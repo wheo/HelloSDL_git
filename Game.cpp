@@ -26,8 +26,13 @@ Game::Game(int argc, char** argv){
 	
 #endif
     
+#if 0
     screen_w = atoi(argv[1]);
     screen_h = atoi(argv[2]);
+#else
+	screen_w = 1024;
+	screen_h = 768;
+#endif
     
     if(initSystems() == -1)
         cerr << "Problem occured while initializing SDL systems" << endl;
@@ -59,8 +64,27 @@ int Game::initSystems(){
 		cerr << "Problem while initializing SDL" << endl;
 		return -1;
 	}
-	
+
+#if SDL1	
 	screen = SDL_SetVideoMode(screen_w, screen_h, 32, SDL_SWSURFACE);
+#else
+	window = SDL_CreateWindow("",
+		SDL_WINDOWPOS_UNDEFINED,
+		SDL_WINDOWPOS_UNDEFINED,
+		screen_w,
+		screen_h,
+		SDL_SWSURFACE);
+
+	if (window == NULL) {
+		cerr << "Window could not be created!" << endl;
+	}
+	else {
+		renderer = SDL_CreateRenderer(window, -1, 0);
+		screen = SDL_GetWindowSurface(window);
+	}
+
+#endif
+	
 	if (TTF_Init() < 0) {
 		cerr << "Problem initializing SDL_ttf" << endl;
 		return -1;
@@ -95,12 +119,27 @@ int Game::Loop(){
             
             if(displayFPS){
                 static char buffer[10] = {0};
+#if _S
                 sprintf(buffer, "%d FPS", fps_counter->getFPS());
+#else
+				sprintf_s(buffer, sizeof(buffer), "%d FPS", fps_counter->getFPS());
+#endif
+#if SDL1
                 SDL_WM_SetCaption(buffer, NULL);
+#else
+				SDL_SetWindowTitle(window, buffer);
+#endif
             }else
+#if SDL1
                 SDL_WM_SetCaption("Arkanoid", NULL);
-            
+#else
+				SDL_SetWindowTitle(window, "Arkanoid");
+#endif
+#if SDL1
             SDL_Flip(screen);
+#else
+			SDL_RenderPresent(renderer);
+#endif
         }
     }
     return 0;
@@ -113,8 +152,11 @@ void Game::HandleEvents(){
     while(SDL_PollEvent(&event))
         if(event.type == SDL_QUIT)
             ShutDown();
-
+#if SDL1
     Uint8* keystates = SDL_GetKeyState(NULL);
+#else
+	const Uint8* keystates = SDL_GetKeyboardState(NULL);
+#endif
     
     if(keystates[SDLK_q])
             ShutDown();
@@ -179,7 +221,7 @@ string IntToStr(int n){
 
 void DisplayFinishText(int ms, const char* text){
     
-    TTF_Font* font = TTF_OpenFont("../../Arkanoid/data/font.ttf", 70);
+    TTF_Font* font = TTF_OpenFont(".data/font.ttf", 70);
     
     int posX = g_GamePtr->GetScreen_W()/2;
     int posY = g_GamePtr->GetScreen_H()/2;
@@ -194,7 +236,11 @@ void DisplayFinishText(int ms, const char* text){
     Game::Draw(g_GamePtr->GetScreen(), text_shade, posX - text_shade->w/2 +2, posY - text_shade->h/2 +2);
     Game::Draw(g_GamePtr->GetScreen(), text_image, posX - text_image->w/2, posY - text_image->h/2);
     
+#if SDL1
     SDL_Flip(g_GamePtr->GetScreen());
+#else
+	SDL_RenderPresent(g_GamePtr->Get_Renderer());
+#endif
     
     int firstMeasure = SDL_GetTicks();
     while(SDL_GetTicks() - firstMeasure <= ms);

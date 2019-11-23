@@ -9,8 +9,6 @@
 #include "Animation.h"
 #include "Game.h"
 
-
-
 Animation::Animation(const char* filename, int maxFrame, int frameDelay, int frameWidth, int frameHeight, int animationColumns, int animationDirection ){
     
     //Animation's properties initialization
@@ -75,13 +73,13 @@ Animation::~Animation(){
 }
 
 void Animation::Animate(){
-    if(++frameCount > frameDelay){
+    if(++frameCount > frameDelay) {
         curFrame += animationDirection;
         
-        if(curFrame > maxFrame){
+        if(curFrame > maxFrame) {
             curFrame = 0;
         }
-        if(curFrame < 0 ){
+        if(curFrame < 0 ) {
             curFrame = maxFrame;
         }
         frameCount = 0;
@@ -102,6 +100,3 @@ bool Animation::IsAutoAnimation(){                                              
     else
         return false ;
 };
-
-
-

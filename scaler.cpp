@@ -19,7 +19,11 @@ SDL_Surface* LoadScaledBitmap(const char* filename, int width, int height){
         exit(1);
     }
     // apply alpha channel
+#if SDL1
     SDL_Surface* temp2 = SDL_DisplayFormatAlpha(temp);
+#else
+	SDL_Surface* temp2 = SDL_ConvertSurfaceFormat(temp, SDL_PIXELFORMAT_ABGR8888, 0);
+#endif
     
     //scale bitmap
     SDL_Surface* image = ScaleSurface(temp2, width, height);
@@ -31,8 +35,6 @@ SDL_Surface* LoadScaledBitmap(const char* filename, int width, int height){
     //returning pointer to scaled bitmap
     return image;
 }
-
-
 
 SDL_Surface *ScaleSurface(SDL_Surface *Surface, Uint16 Width, Uint16 Height)  // doesnt delete source bitmap, but we deal with it in LoadScaledBitmap
 {

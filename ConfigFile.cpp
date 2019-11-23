@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Maciej Żurad. All rights reserved.
 //
 
+#include <algorithm>
 #include "ConfigFile.h"
 
 

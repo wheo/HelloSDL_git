@@ -49,7 +49,7 @@ int Platform::Update(){
     if(!GetLives()){
         PlayingState* playing_state = dynamic_cast<PlayingState*>(g_GamePtr->GetState());
         playing_state->SetChangingStateFlag(true);
-        playing_state->PushScore(getenv("USER"), GetScore());
+        //playing_state->PushScore(getenv("USER"), GetScore());
     }
     return 0;
 }

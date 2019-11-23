@@ -6,10 +6,9 @@
 #include "SDL_image.h"
 #include "Game.h"
 
-
 int main(int argc, char* argv[]) {
 
 	srand(SDL_GetTicks()); // Initnalizing random seed
-	Game game(argc, argv); // Creating Game
+	Game game(argc, argv); // Creating Game	
 	return game.Loop();
 }
