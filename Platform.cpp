@@ -8,7 +8,6 @@
 
 #include "Platform.h"
 
-
 Platform::Platform(const char* filename, int maxFrame, int frameDelay, int frameWidth,
            int frameHeight, int animationColumns, int animationDirection )
             : GameObject(filename, maxFrame, frameDelay, frameWidth, frameHeight, animationColumns, animationDirection), has_effect(-1)

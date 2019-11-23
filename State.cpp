@@ -13,7 +13,7 @@
 
 State::State(){
     ifstream file;
-    file.open(".data/highscores");
+    file.open("./data/highscores");
     string line;
     while(getline(file, line)){
         
