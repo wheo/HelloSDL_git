@@ -1,24 +1,15 @@
+#include <iostream>
+#include "SDL_main.h"
 #include "SDL.h"
+#include "SDL_ttf.h"
+#include "SDL_mixer.h"
+#include "SDL_image.h"
+#include "Game.h"
+
 
 int main(int argc, char* argv[]) {
-	SDL_Init(SDL_INIT_EVERYTHING);
-	SDL_Window* window = SDL_CreateWindow("HelloSDL", SDL_WINDOWPOS_CENTERED,
-		SDL_WINDOWPOS_CENTERED,
-		600,
-		400,
-		SDL_WINDOW_SHOWN);
-	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
 
-	SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-
-	SDL_RenderClear(renderer);
-
-	SDL_RenderPresent(renderer);
-
-	SDL_Delay(1000);
-
-	SDL_Quit();
-
-	// 두번째 커밋을 위한 주석 테스트
-	return 0;
+	srand(SDL_GetTicks()); // Initnalizing random seed
+	Game game(argc, argv); // Creating Game
+	return game.Loop();
 }

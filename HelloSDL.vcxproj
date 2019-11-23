@@ -89,12 +89,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\SDL2\include;header;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>..\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -128,7 +128,45 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Background.cpp" />
+    <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="Block.cpp" />
+    <ClCompile Include="ConfigFile.cpp" />
+    <ClCompile Include="Effect.cpp" />
+    <ClCompile Include="FpsCounter.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Gui.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MapLoader.cpp" />
+    <ClCompile Include="MenuState.cpp" />
+    <ClCompile Include="Platform.cpp" />
+    <ClCompile Include="PlayingState.cpp" />
+    <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="scaler.cpp" />
+    <ClCompile Include="Singleton.cpp" />
+    <ClCompile Include="State.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="header\Animation.h" />
+    <ClInclude Include="header\Background.h" />
+    <ClInclude Include="header\Ball.h" />
+    <ClInclude Include="header\Block.h" />
+    <ClInclude Include="header\ConfigFile.h" />
+    <ClInclude Include="header\Effect.h" />
+    <ClInclude Include="header\FpsCounter.h" />
+    <ClInclude Include="header\Game.h" />
+    <ClInclude Include="header\GameObject.h" />
+    <ClInclude Include="header\Gui.h" />
+    <ClInclude Include="header\MapLoader.h" />
+    <ClInclude Include="header\MenuState.h" />
+    <ClInclude Include="header\Platform.h" />
+    <ClInclude Include="header\PlayingState.h" />
+    <ClInclude Include="header\Projectile.h" />
+    <ClInclude Include="header\scaler.h" />
+    <ClInclude Include="header\Singleton.h" />
+    <ClInclude Include="header\State.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
